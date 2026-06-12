@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une question importante...</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="step-1" class="container">
+        <h1>Coucou bebou ! ❤️<br>Tu veux bien venir en date avec moi ?</h1>
+        <div style="margin-top: 30px;">
+            <button class="btn btn-yes" onclick="nextStep(2)">Ouiiiii 🥰</button>
+            <button class="btn btn-no" id="btn-no">Non 😢</button>
+        </div>
+    </div>
+
+<div id="step-2" class="container hidden">
+        <h1>Trop bien ! 😍<br>On fait quoi de beau ?</h1>
+        <div class="activity-grid">
+            <div class="activity-card" onclick="chooseActivity('une Rando 🥾')">Rando 🥾</div>
+            <div class="activity-card" onclick="chooseActivity('un Bowling 🎳')">Bowling 🎳</div>
+            <div class="activity-card" onclick="chooseActivity('un Cinéma 🍿')">Cinéma 🍿</div>
+            <div class="activity-card" onclick="chooseActivity('un Resto 🍝')">Resto 🍝</div>
+            <div class="activity-card" onclick="chooseActivity('Netflix & Chill 📺')">Netflix & Chill 📺</div>
+            <div class="activity-card" onclick="chooseActivity('une Balade à moto 🏍️')">Balade à moto 🏍️</div>
+            <div class="activity-card" onclick="chooseActivity('une Soirée Gaming 🎮')">Soirée Gaming 🎮</div>
+            <div class="activity-card" onclick="chooseActivity('un Pique-nique 🧺')">Pique-nique 🧺</div>
+        </div>
+    </div>
+
+    <div id="step-3" class="container hidden">
+        <h1>Parfait pour <span id="chosen-activity"></span> ! ✨<br>On fait ça quand ? </h1>
+        <div style="margin-top: 20px;">
+            <input type="date" id="date-input" required>
+            <br>
+            <input type="time" id="time-input" required>
+            <br>
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+                <button class="btn btn-back" onclick="nextStep(2)">⬅️ Retour</button>
+                <button class="btn btn-yes" onclick="validateDate()">Valider 🗓️</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-4" class="container hidden">
+        <h1>C'est noté mon amour ! ❤️</h1>
+        <p style="font-size: 1.2rem; margin-top: 10px;">J'ai trop hâte d'y être !</p>
+        <div class="final-emoji">🧸🌹</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
