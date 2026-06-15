@@ -1,3 +1,6 @@
+// --- NOUVELLES VARIABLES GLOBALES ---
+let activiteChoisie = ""; // Pour garder en mémoire l'activité pour le mail
+
 // --- LOGIQUE DU BOUTON "NON" QUI S'ENFUIT EN GLISSANT ---
 const btnNo = document.getElementById('btn-no');
 
@@ -56,8 +59,7 @@ btnNo.addEventListener('touchstart', (e) => {
     flee(e);
 });
 
-// --- LE RESTE DU CODE NE CHANGE PAS ---
-// (Laisse les fonctions nextStep, chooseActivity et validateDate juste en dessous)
+
 // --- GESTION DES ÉTAPES ---
 function nextStep(stepNumber) {
     // On cache toutes les sections
@@ -70,11 +72,14 @@ function nextStep(stepNumber) {
     document.getElementById(`step-${stepNumber}`).classList.remove('hidden');
 }
 
+
 // --- CHOIX DE L'ACTIVITÉ ---
 function chooseActivity(activityName) {
+    activiteChoisie = activityName; // On sauvegarde l'activité pour l'e-mail !
     document.getElementById('chosen-activity').innerText = activityName;
     nextStep(3);
 }
+
 
 // --- VALIDATION DE LA DATE ET DE L'HEURE ---
 function validateDate() {
@@ -86,5 +91,37 @@ function validateDate() {
         return;
     }
     
-    nextStep(4);
+    // Au lieu de passer directement à l'étape 4, on affiche la chatbox
+    document.getElementById('chatbox-container').style.display = 'flex';
 }
+
+
+// --- LOGIQUE DE LA CHATBOX (MAILTO) ---
+document.getElementById('chatbox-submit-btn').onclick = function() {
+    const emailDestinataire = document.getElementById('chatbox-email').value;
+
+    if (!emailDestinataire) {
+        alert("S'il te plaît, entre une adresse e-mail valide.");
+        return;
+    }
+
+    // On récupère la date et l'heure qui ont été validées juste avant
+    const dateChoisie = document.getElementById('date-input').value;
+    const heureChoisie = document.getElementById('time-input').value;
+
+    // Préparation du sujet et du message
+    const sujet = "C'est validé pour notre date ! 🥰";
+    const message = `Coucou !\n\nVoici le récapitulatif de notre date :\n- Activité : ${activiteChoisie}\n- Date : ${dateChoisie}\n- Heure : ${heureChoisie}\n\nJ'ai trop hâte ! ❤️`;
+
+    // Création du lien mailto avec l'e-mail saisi dans la chatbox
+    const lienMailto = `mailto:${emailDestinataire}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+
+    // Ouvre l'application mail de son appareil
+    window.location.href = lienMailto;
+
+    // On referme la chatbox pour faire propre
+    document.getElementById('chatbox-container').style.display = 'none';
+
+    // Et on passe enfin à la toute dernière étape (l'écran de fin) !
+    nextStep(4);
+};
