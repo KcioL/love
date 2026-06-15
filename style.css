@@ -118,3 +118,68 @@ input[type="date"], input[type="time"] {
     background-color: #e0e0e0;
     transform: scale(1.05);
 }
+/* Fond semi-transparent pour concentrer l'attention */
+.chatbox-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+
+/* La fenêtre de chat */
+.chatbox-window {
+    background: white;
+    border-radius: 15px;
+    width: 350px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.chatbox-header {
+    background: #ff4d6d; /* Couleur romantique */
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.chatbox-body {
+    padding: 20px;
+    color: #333;
+}
+
+.chatbox-body input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.chatbox-footer {
+    padding: 15px;
+    text-align: center;
+}
+
+.chatbox-footer button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.chatbox-footer button:hover {
+    background: #ff758f;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
